@@ -5,7 +5,6 @@ const angular = require('angular-eslint');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 
 module.exports = tseslint.config(
-  eslintPluginPrettierRecommended,
   {
     files: ['**/*.ts'],
     extends: [
@@ -17,7 +16,7 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       '@angular-eslint/directive-selector': [
-        'error',
+        'off',
         {
           type: 'attribute',
           prefix: 'app',
@@ -25,13 +24,14 @@ module.exports = tseslint.config(
         },
       ],
       '@angular-eslint/component-selector': [
-        'error',
+        'off',
         {
           type: 'element',
           prefix: 'app',
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/template/alt-text': ['off'],
     },
   },
   {
@@ -40,13 +40,7 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-    rules: {
-      'prettier/prettier': [
-        'error',
-        {
-          parser: 'angular',
-        },
-      ],
-    },
-  }
+    rules: {},
+  },
+  eslintPluginPrettierRecommended
 );
