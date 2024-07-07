@@ -32,6 +32,7 @@ module.exports = tseslint.config(
         },
       ],
       '@angular-eslint/template/alt-text': ['off'],
+      '@typescript-eslint/consistent-type-definitions': ['off'],
     },
   },
   {
