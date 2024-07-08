@@ -40,7 +40,7 @@ export const IssuePriorityColors = {
 export type IssueSchema = {
   id: string;
   title: string;
-  type: IssueType;
+  iss_type: IssueType;
   status: IssueStatus;
   priority: IssuePriority;
   listPosition: number;

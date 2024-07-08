@@ -1,3 +1,4 @@
+import { BaseResponse } from '../response';
 import { IssueSchema } from './issue';
 import { UserSchema } from './user';
 
@@ -18,3 +19,5 @@ export enum ProjectCategory {
   MARKETING = 'Marketing',
   BUSINESS = 'Business',
 }
+
+export type projectResponse = BaseResponse<ProjectSchema>;
