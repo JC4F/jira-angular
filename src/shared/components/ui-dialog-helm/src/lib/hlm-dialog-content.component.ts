@@ -14,9 +14,11 @@ import {
   BrnDialogRef,
   injectBrnDialogContext,
 } from '@spartan-ng/ui-dialog-brain';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+// import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import type { ClassValue } from 'clsx';
 import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
+import { HlmIconComponent } from '@/shared/components/ui-icon-helm/src';
+import { provideIcons } from '@ng-icons/core';
 
 @Component({
   selector: 'hlm-dialog-content',

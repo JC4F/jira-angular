@@ -17,17 +17,9 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@spartan-ng/ui-dialog-helm": [
-        ".\\src/shared/components/ui-dialog-helm/src/index.ts"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "angularCompilerOptions": {

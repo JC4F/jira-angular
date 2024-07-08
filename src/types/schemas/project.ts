@@ -1,4 +1,4 @@
-import { JIssue } from './issue';
+import { IssueSchema } from './issue';
 import { UserSchema } from './user';
 
 export type ProjectSchema = {
@@ -9,7 +9,7 @@ export type ProjectSchema = {
   category: ProjectCategory;
   createdAt: string;
   updateAt: string;
-  issues: JIssue[];
+  issues: IssueSchema[];
   users: UserSchema[];
 };
 

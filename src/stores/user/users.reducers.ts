@@ -10,7 +10,7 @@ export const initialState: AuthState | null = null;
 
 export const userReducer = createFeature({
   name: 'user',
-  reducer: createReducer(
+  reducer: createReducer<AuthState | null>(
     initialState,
     on(AuthActions.logout, () => initialState),
     on(AuthActions.loginFail, () => initialState)

@@ -37,7 +37,7 @@ export const IssuePriorityColors = {
   [IssuePriority.LOW]: '#2D8738',
   [IssuePriority.LOWEST]: '#57A55A',
 };
-export interface JIssue {
+export type IssueSchema = {
   id: string;
   title: string;
   type: IssueType;
@@ -54,7 +54,7 @@ export interface JIssue {
   userIds: string[];
   comments: CommentSchema[];
   projectId: string;
-}
+};
 
 export class IssueTypeWithIcon {
   value: string;
