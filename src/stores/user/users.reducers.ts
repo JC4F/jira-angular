@@ -1,7 +1,7 @@
 import { UserSchema } from '@/types';
 import { createFeature, createReducer } from '@ngrx/store';
-import { AuthActions } from './users.actions';
 import { immerOn } from 'ngrx-immer/store';
+import { AuthActions } from './users.actions';
 
 export type AuthState = UserSchema & {
   isLoading: boolean;

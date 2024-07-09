@@ -1,8 +1,10 @@
-<div id="app-frame">
-  <!-- <nz-spin
-    class="global-spinner"
-    [nzSpinning]="projectQuery.isLoading$ | async"
-    nzSize="large">
-    <router-outlet></router-outlet>
-  </nz-spin> -->
+<div class="w-[100vw] h-[100vw] overflow-hidden flex relative">
+  @if (isLoading | async) {
+    <div
+      class="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]">
+      <hlm-spinner />
+    </div>
+  }
+
+  <router-outlet></router-outlet>
 </div>
