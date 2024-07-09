@@ -33,6 +33,7 @@ module.exports = tseslint.config(
       ],
       '@angular-eslint/template/alt-text': ['off'],
       '@typescript-eslint/consistent-type-definitions': ['off'],
+      '@angular-eslint/template/click-events-have-key-events': ['off'],
     },
   },
   {
@@ -41,7 +42,10 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-    rules: {},
+    rules: {
+      '@angular-eslint/template/click-events-have-key-events': ['off'],
+      '@angular-eslint/template/label-has-associated-control': ['off'],
+    },
   },
   eslintPluginPrettierRecommended
 );

@@ -2036,6 +2036,13 @@
   dependencies:
     tslib "^2.2.0"
 
+"@ngneat/until-destroy@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/until-destroy/-/until-destroy-10.0.0.tgz#105db43d858bc1cec2f36272a296af68bed7bf43"
+  integrity sha512-xXFAabQ4YVJ82LYxdgUlaKZyR3dSbxqG3woSyaclzxfCgWMEDweCcM/GGYbNiHJa0WwklI98RXHvca+UyCxpeg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngrx/effects@^18.0.1":
   version "18.0.1"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-18.0.1.tgz#09ed0b32dc2677eb634fa19c2a8125628e11ae61"
@@ -2622,6 +2629,27 @@
   version "0.0.1-alpha.352"
   resolved "https://registry.yarnpkg.com/@spartan-ng/ui-dialog-brain/-/ui-dialog-brain-0.0.1-alpha.352.tgz#22fea2b764f6b99749cc82eb1fcaebebb9d88fd6"
   integrity sha512-nS8uitcb+N6B9ULszlQQgHkCVb3w2XAgB0ySPgaznzPVEryZnKpRMFKLzrTVkj32q0bo5C+LV1SgEvK8sZ/QrA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@spartan-ng/ui-label-brain@0.0.1-alpha.352":
+  version "0.0.1-alpha.352"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-label-brain/-/ui-label-brain-0.0.1-alpha.352.tgz#e2fe8aac4d4112eee89be4342b5c3f8a708a2a0e"
+  integrity sha512-8Q9L47jNfwYpsRlbM4j8TFM1L8VkK/3dx+C/wsubNhPNigG63qpEmDfjLdpoYB+lo6vcPKX8M05doz3v4Ljpng==
+  dependencies:
+    tslib "^2.3.0"
+
+"@spartan-ng/ui-select-brain@0.0.1-alpha.352":
+  version "0.0.1-alpha.352"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-select-brain/-/ui-select-brain-0.0.1-alpha.352.tgz#9c161d487ef770cee8e75822fc8905b5005d4c7b"
+  integrity sha512-7GLptSr5OMlUFozNYlWFoXnciW1X3zuq8jX6giFjOWBaVXOOlQCFaMMwoxUSEKLz28js2yChMIQU0v0hss6JBg==
+  dependencies:
+    tslib "^2.3.0"
+
+"@spartan-ng/ui-sheet-brain@0.0.1-alpha.352":
+  version "0.0.1-alpha.352"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-sheet-brain/-/ui-sheet-brain-0.0.1-alpha.352.tgz#a190fdc31a669c7b88fb91d2eb41daf6a4947743"
+  integrity sha512-6aGQ6nXoAQUj/IsBhKp4JnFwV6JHqrcYGUwIt32BaTWcFxHQzvDfkAgZN5XOzpLk1t45/0ds7+rt3UZ+ckEEGA==
   dependencies:
     tslib "^2.3.0"
 
@@ -9108,7 +9136,7 @@ tailwind-merge@^2.2.0:
   dependencies:
     "@babel/runtime" "^7.24.1"
 
-tailwindcss-animate@^1.0.6:
+tailwindcss-animate@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz#318b692c4c42676cc9e67b19b78775742388bef4"
   integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==

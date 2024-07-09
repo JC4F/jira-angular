@@ -1,1 +1,9 @@
-<p>project works!</p>
+<div class="w-full h-full flex">
+  <app-navigation
+    [expanded]="expanded"
+    (manualToggle)="manualToggle()"></app-navigation>
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<!-- <svg-definitions></svg-definitions> -->

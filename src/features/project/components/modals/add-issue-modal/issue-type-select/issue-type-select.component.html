@@ -1,0 +1,15 @@
+<brn-select class="inline-block w-full" placeholder="Select an option">
+  <hlm-select-trigger class="w-56">
+    <hlm-select-value />
+  </hlm-select-trigger>
+  <hlm-select-content>
+    <hlm-option *ngFor="let type of issueTypes" [value]="type.value"
+      ><div class="flex items-center">
+        <svg-icon [name]="type.icon" [size]="20"> </svg-icon>
+        <span class="ml-3 font-semibold uppercase text-textMedium text-13">{{
+          type.value
+        }}</span>
+      </div></hlm-option
+    >
+  </hlm-select-content>
+</brn-select>
