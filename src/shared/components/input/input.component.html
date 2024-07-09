@@ -1,0 +1,23 @@
+<div [ngClass]="['relative flex w-full h-8', containerClassName]">
+  <div
+    *ngIf="icon"
+    class="absolute h-full left-0 bottom-0 top-0 flex items-center justify-center"
+    [style.width.px]="iconContainerWidth">
+    <svg-icon [name]="icon" [size]="iconSize"> </svg-icon>
+  </div>
+
+  <input
+    hlmInput
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [ngClass]="['input', 'form-input']"
+    [style.padding-left.px]="icon ? iconContainerWidth : 0"
+    [style.padding-right.px]="isShowClearButton ? iconContainerWidth : 0" />
+
+  <div
+    *ngIf="isShowClearButton"
+    class="absolute h-full left-auto right-0 bottom-0 top-0 flex items-center justify-center cursor-pointer"
+    [style.width.px]="iconContainerWidth">
+    <hlm-icon size="sm" name="lucideXCircle" (click)="clear()" />
+  </div>
+</div>

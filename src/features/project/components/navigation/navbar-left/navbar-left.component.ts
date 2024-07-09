@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HlmDialogService } from '@/shared/components/ui-dialog-helm/src';
+import { Component, inject, OnInit } from '@angular/core';
 import { AddIssueModalComponent } from '../../modals/add-issue-modal/add-issue-modal.component';
 import { SearchDrawerComponent } from '../../search/search-drawer/search-drawer.component';
 
@@ -13,15 +14,13 @@ class NavItem {
 type Handler = () => void;
 
 @Component({
+  standalone: true,
   selector: 'app-navbar-left',
   templateUrl: './navbar-left.component.html',
 })
 export class NavbarLeftComponent implements OnInit {
   items: NavItem[] = [];
-  constructor(
-    private _drawerService: NzDrawerService,
-    private _modalService: NzModalService
-  ) {}
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
   ngOnInit(): void {
     this.items = [
@@ -31,21 +30,10 @@ export class NavbarLeftComponent implements OnInit {
   }
 
   openCreateIssueModal() {
-    this._modalService.create({
-      nzContent: AddIssueModalComponent,
-      nzClosable: false,
-      nzFooter: null,
-      nzWidth: 700,
-    });
+    this._hlmDialogService.open(AddIssueModalComponent);
   }
 
   openSearchDrawler() {
-    this._drawerService.create({
-      nzContent: SearchDrawerComponent,
-      nzTitle: null,
-      nzPlacement: 'left',
-      nzClosable: false,
-      nzWidth: 500,
-    });
+    this._hlmDialogService.open(SearchDrawerComponent);
   }
 }

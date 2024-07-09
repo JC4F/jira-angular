@@ -9,6 +9,7 @@ import {
 const BASE_TIMER_DELAY = 10;
 
 @Directive({
+  standalone: true,
   selector: '[jAutofocus]',
 })
 export class AutofocusDirective implements AfterContentInit, OnDestroy {

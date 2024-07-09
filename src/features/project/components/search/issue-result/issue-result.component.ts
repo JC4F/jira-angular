@@ -1,18 +1,18 @@
+import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
+import { IssueUtil } from '@/shared/utils/issue';
+import { IssueSchema } from '@/types';
 import { Component, Input } from '@angular/core';
-import { JIssue } from '@trungk18/interface/issue';
-import { IssueUtil } from '@trungk18/project/utils/issue';
 
 @Component({
+  standalone: true,
   selector: 'issue-result',
   templateUrl: './issue-result.component.html',
-  styleUrls: ['./issue-result.component.scss']
+  imports: [SvgIconComponent],
 })
 export class IssueResultComponent {
-  @Input() issue: JIssue;
+  @Input() issue: IssueSchema;
 
   get issueTypeIcon() {
-    return IssueUtil.getIssueTypeIcon(this.issue?.type);
+    return IssueUtil.getIssueTypeIcon(this.issue?.iss_type);
   }
-
-  constructor() {}
 }

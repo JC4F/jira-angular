@@ -13,8 +13,8 @@ import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
   templateUrl: './issue-reporter-select.component.html',
 })
 export class IssueReporterSelectComponent {
-  @Input() control!: FormControl;
-  @Input() users!: UserSchema[];
+  @Input() control: FormControl;
+  @Input() users: UserSchema[];
 
   getUser(userId: string) {
     return this.users.find(user => user.id === userId);
