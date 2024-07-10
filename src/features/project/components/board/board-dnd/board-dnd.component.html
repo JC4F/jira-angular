@@ -4,6 +4,6 @@
     board-dnd-list
     *ngFor="let status of issueStatuses"
     [status]="status"
-    [currentUserId]="authQuery.userId$ | async"
-    [issues$]="projectQuery.issueByStatusSorted$(status)"></div>
+    [currentUserId]="(currentUserId | async) || ''"
+    [issues$]="getIssues(status)"></div>
 </div>

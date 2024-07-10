@@ -1,6 +1,10 @@
 import { AvatarComponent } from '@/shared/components/avatar/avatar.component';
 import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
 import { HlmDialogService } from '@/shared/components/ui-dialog-helm/src';
+import {
+  HlmTooltipComponent,
+  HlmTooltipTriggerDirective,
+} from '@/shared/components/ui-tooltip-helm/src';
 import { IssueUtil } from '@/shared/utils/issue';
 import { issueById } from '@/stores/project/project.selector';
 import { RootState } from '@/stores/root-store';
@@ -14,13 +18,20 @@ import {
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
+import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
 import { IssueModalComponent } from '../issue-modal/issue-modal.component';
 
 @Component({
   standalone: true,
   selector: 'issue-card',
   templateUrl: './issue-card.component.html',
-  imports: [SvgIconComponent, AvatarComponent],
+  imports: [
+    SvgIconComponent,
+    AvatarComponent,
+    HlmTooltipComponent,
+    HlmTooltipTriggerDirective,
+    BrnTooltipContentDirective,
+  ],
 })
 @UntilDestroy()
 export class IssueCardComponent implements OnChanges, OnInit {

@@ -1,60 +1,85 @@
+import { AvatarComponent } from '@/shared/components/avatar/avatar.component';
+import { InputComponent } from '@/shared/components/input/input.component';
+import { HlmButtonModule } from '@/shared/components/ui-button-helm/src';
+import {
+  HlmTooltipComponent,
+  HlmTooltipTriggerDirective,
+} from '@/shared/components/ui-tooltip-helm/src';
+import { FilterActions } from '@/stores/filter/filters.actions';
+import { RootState } from '@/stores/root-store';
+import { UserSchema } from '@/types';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FilterQuery } from '@trungk18/project/state/filter/filter.query';
-import { FilterService } from '@trungk18/project/state/filter/filter.service';
+import { Store } from '@ngrx/store';
+import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
-import { JUser } from '@trungk18/interface/user';
 
 @Component({
+  standalone: true,
   selector: 'board-filter',
   templateUrl: './board-filter.component.html',
-  styleUrls: ['./board-filter.component.scss']
+  imports: [
+    AvatarComponent,
+    InputComponent,
+    CommonModule,
+    HlmButtonModule,
+    HlmTooltipComponent,
+    HlmTooltipTriggerDirective,
+    BrnTooltipContentDirective,
+  ],
 })
 @UntilDestroy()
 export class BoardFilterComponent implements OnInit {
   searchControl: FormControl = new FormControl('');
   userIds: string[];
+  projectUsers = this._store.select(state => state.project.users);
+  onlyMyIssue = this._store.select(state => state.filter.onlyMyIssue);
+  ignoreResolved = this._store.select(state => state.filter.ignoreResolved);
+  hasClearAll = this._store.select(state => {
+    const { searchTerm, userIds, onlyMyIssue, ignoreResolved } = state.filter;
 
-  constructor(
-    public projectQuery: ProjectQuery,
-    public filterQuery: FilterQuery,
-    public filterService: FilterService
-  ) {
+    return !!searchTerm || !!userIds?.length || onlyMyIssue || ignoreResolved;
+  });
+
+  constructor(private _store: Store<RootState>) {
     this.userIds = [];
   }
 
   ngOnInit(): void {
     this.searchControl.valueChanges
       .pipe(debounceTime(100), distinctUntilChanged(), untilDestroyed(this))
-      .subscribe((term) => {
-        this.filterService.updateSearchTerm(term);
+      .subscribe(term => {
+        this._store.dispatch(FilterActions.searchTerm(term));
       });
 
-    this.filterQuery.userIds$.pipe(untilDestroyed(this)).subscribe((userIds) => {
-      this.userIds = userIds;
-    });
+    this._store
+      .select(state => state.filter.userIds)
+      .pipe(untilDestroyed(this))
+      .subscribe(userIds => {
+        this.userIds = userIds;
+      });
   }
 
-  isUserSelected(user: JUser) {
+  isUserSelected(user: UserSchema) {
     return this.userIds.includes(user.id);
   }
 
   ignoreResolvedChanged() {
-    this.filterService.toggleIgnoreResolve();
+    this._store.dispatch(FilterActions.toggleIgnoreResolve());
   }
 
   onlyMyIssueChanged() {
-    this.filterService.toggleOnlyMyIssue();
+    this._store.dispatch(FilterActions.toggleOnlyMyIssue());
   }
 
-  userChanged(user: JUser) {
-    this.filterService.toggleUserId(user.id);
+  userChanged(user: UserSchema) {
+    this._store.dispatch(FilterActions.toggleUserId({ userId: user.id }));
   }
 
   resetAll() {
     this.searchControl.setValue('');
-    this.filterService.resetAll();
+    this._store.dispatch(FilterActions.resetAll());
   }
 }
