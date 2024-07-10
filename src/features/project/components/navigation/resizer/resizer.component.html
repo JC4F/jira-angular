@@ -1,17 +1,15 @@
-<div class="sizer-wrap">
-    <div class="strip"></div>
-    <div class="sizer">
-        <div class="line">
-
-        </div>
-    </div>
-    <button class="btn">
-        <div class="overlay"></div>
-        <span class="cursor-pointer fill-current text-white flex-shrink-0 leading-none">
-            <svg-icon [name]="icon"
-                      [size]="24"
-                      class="icon text-textMedium">
-            </svg-icon>
-        </span>
-    </button>
+<div class="absolute bottom-0 top-0 w-6 z-[3]">
+  <div
+    class="w-[3px] bg-primary absolute bottom-0 left-[-3px] top-0 opacity-[0.5] transition-all"></div>
+  <div class="cursor-ew-resize h-full left-[-4px] relative w-6">
+    <div
+      class="bg-[#4c9aff] opacity-0 h-full left-[3px] absolute w-[2px] transition-all"></div>
+  </div>
+  <button hlmBtn size="icon" variant="outline">
+    <span
+      class="cursor-pointer fill-current text-white flex-shrink-0 leading-none">
+      <svg-icon [name]="icon" [size]="24" class="icon text-textMedium">
+      </svg-icon>
+    </span>
+  </button>
 </div>

@@ -17,7 +17,7 @@ export class AutofocusDirective implements AfterContentInit, OnDestroy {
   @Input() timerDelay: number = BASE_TIMER_DELAY;
 
   private elementRef: ElementRef;
-  private timer: NodeJS.Timeout | null = null;
+  private timer: unknown = null;
 
   constructor(elementRef: ElementRef) {
     this.elementRef = elementRef;
@@ -58,7 +58,7 @@ export class AutofocusDirective implements AfterContentInit, OnDestroy {
   }
 
   private stopFocusWorkflow(): void {
-    clearTimeout(this.timer as unknown as number);
+    clearTimeout(this.timer as number);
     this.timer = null;
   }
 }

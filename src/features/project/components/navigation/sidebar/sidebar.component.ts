@@ -1,14 +1,19 @@
+import { SideBarLinks } from '@/constants';
+import { AvatarComponent } from '@/shared/components/avatar/avatar.component';
+import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
+import { RootState } from '@/stores/root-store';
+import { ProjectSchema, SideBarLink } from '@/types';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { JProject } from '@trungk18/interface/project';
-import { SideBarLink } from '@trungk18/interface/ui-model/nav-link';
-import { SideBarLinks } from '@trungk18/project/config/sidebar';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
+import { Store } from '@ngrx/store';
 
 @Component({
+  standalone: true,
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  imports: [AvatarComponent, CommonModule, RouterLink, SvgIconComponent],
 })
 @UntilDestroy()
 export class SidebarComponent implements OnInit {
@@ -18,13 +23,16 @@ export class SidebarComponent implements OnInit {
     return this.expanded ? 240 : 15;
   }
 
-  project: JProject;
+  project: ProjectSchema;
   sideBarLinks: SideBarLink[];
 
-  constructor(private _projectQuery: ProjectQuery) {
-    this._projectQuery.all$.pipe(untilDestroyed(this)).subscribe((project) => {
-      this.project = project;
-    });
+  constructor(private _store: Store<RootState>) {
+    this._store
+      .select(state => state.project)
+      .pipe(untilDestroyed(this))
+      .subscribe(project => {
+        this.project = project;
+      });
   }
 
   ngOnInit(): void {
