@@ -39,6 +39,7 @@
     "@spartan-ng/ui-tooltip-brain": "0.0.1-alpha.352",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "date-fns": "^3.6.0",
     "immer": "^10.1.1",
     "ngrx-immer": "^2.2.1",
     "ngx-quill": "^26.0.5",
