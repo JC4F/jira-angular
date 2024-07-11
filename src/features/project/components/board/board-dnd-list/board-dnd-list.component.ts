@@ -11,6 +11,7 @@ import { FilterState } from '@/stores/filter/filters.reducers';
 import { ProjectActions } from '@/stores/project/projects.actions';
 import { RootState } from '@/stores/root-store';
 import { IssueSchema, IssueStatus, IssueStatusDisplay } from '@/types';
+import { CommonModule } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import * as dateFns from 'date-fns';
@@ -21,7 +22,7 @@ import { IssueCardComponent } from '../../issues/issue-card/issue-card.component
   standalone: true,
   selector: '[board-dnd-list]',
   templateUrl: './board-dnd-list.component.html',
-  imports: [DragDropModule, IssueCardComponent],
+  imports: [DragDropModule, IssueCardComponent, CommonModule],
 })
 @UntilDestroy()
 export class BoardDndListComponent implements OnInit {

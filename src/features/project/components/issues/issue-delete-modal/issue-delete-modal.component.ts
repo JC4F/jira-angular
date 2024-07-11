@@ -1,24 +1,26 @@
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
+import { DeleteIssueModel } from '@/types';
 import { Component, EventEmitter } from '@angular/core';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-import { DeleteIssueModel } from '@trungk18/interface/ui-model/delete-issue-model';
+import { BrnDialogRef } from '@spartan-ng/ui-dialog-brain';
 
 @Component({
+  standalone: true,
   selector: 'issue-delete-modal',
   templateUrl: './issue-delete-modal.component.html',
-  styleUrls: ['./issue-delete-modal.component.scss']
+  imports: [HlmButtonDirective],
 })
 export class IssueDeleteModalComponent {
   issueId: string;
 
   onDelete = new EventEmitter<DeleteIssueModel>();
 
-  constructor(private _modalRef: NzModalRef) {}
+  constructor(private _dialogRef: BrnDialogRef) {}
 
   deleteIssue() {
-    this.onDelete.emit(new DeleteIssueModel(this.issueId, this._modalRef));
+    this.onDelete.emit({ issueId: this.issueId, _dialogRef: this._dialogRef });
   }
 
   closeModal() {
-    this._modalRef.close();
+    this._dialogRef.close();
   }
 }

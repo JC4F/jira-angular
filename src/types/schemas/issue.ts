@@ -56,7 +56,7 @@ export type IssueSchema = {
 };
 
 export class IssueTypeWithIcon {
-  value: string;
+  value: IssueType;
   icon: string;
 
   constructor(issueType: IssueType) {
@@ -67,7 +67,7 @@ export class IssueTypeWithIcon {
 
 export class IssuePriorityIcon {
   icon: string;
-  value: string;
+  value: IssuePriority;
   color: string;
 
   constructor(issuePriority: IssuePriority) {

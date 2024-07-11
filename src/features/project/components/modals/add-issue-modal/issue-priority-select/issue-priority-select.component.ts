@@ -5,14 +5,20 @@ import { IssueUtil } from '@/shared/utils/issue';
 import { IssuePriority, IssuePriorityIcon } from '@/types';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 
 @Component({
   standalone: true,
   selector: 'issue-priority-select',
   templateUrl: './issue-priority-select.component.html',
-  imports: [BrnSelectImports, HlmSelectImports, SvgIconComponent, CommonModule],
+  imports: [
+    BrnSelectImports,
+    HlmSelectImports,
+    SvgIconComponent,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
 })
 export class IssuePrioritySelectComponent {
   @Input() control!: FormControl;

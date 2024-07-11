@@ -34,6 +34,7 @@ module.exports = tseslint.config(
       '@angular-eslint/template/alt-text': ['off'],
       '@typescript-eslint/consistent-type-definitions': ['off'],
       '@angular-eslint/template/click-events-have-key-events': ['off'],
+      '@angular-eslint/no-output-on-prefix': ['off'],
     },
   },
   {

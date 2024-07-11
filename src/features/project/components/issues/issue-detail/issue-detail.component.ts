@@ -1,38 +1,85 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { JIssue } from '@trungk18/interface/issue';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
+import { HlmDialogService } from '@/shared/components/ui-dialog-helm/src';
+import { HlmIconComponent } from '@/shared/components/ui-icon-helm/src';
+import { HlmSpinnerComponent } from '@/shared/components/ui-spinner-helm/src';
+import { RootState } from '@/stores/root-store';
+import { DeleteIssueModel, IssueSchema } from '@/types';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+import {
+  lucideExpand,
+  lucideMegaphone,
+  lucideTimer,
+  lucideTrash,
+} from '@ng-icons/lucide';
+import { Store } from '@ngrx/store';
+import { IssueAssigneesComponent } from '../issue-assignees/issue-assignees.component';
+import { IssueCommentsComponent } from '../issue-comments/issue-comments.component';
 import { IssueDeleteModalComponent } from '../issue-delete-modal/issue-delete-modal.component';
-import { DeleteIssueModel } from '@trungk18/interface/ui-model/delete-issue-model';
+import { IssueDescriptionComponent } from '../issue-description/issue-description.component';
+import { IssuePriorityComponent } from '../issue-priority/issue-priority.component';
+import { IssueReporterComponent } from '../issue-reporter/issue-reporter.component';
+import { IssueStatusComponent } from '../issue-status/issue-status.component';
+import { IssueTitleComponent } from '../issue-title/issue-title.component';
+import { IssueTypeComponent } from '../issue-type/issue-type.component';
 
 @Component({
+  standalone: true,
   selector: 'issue-detail',
   templateUrl: './issue-detail.component.html',
-  styleUrls: ['./issue-detail.component.scss']
+  imports: [
+    HlmButtonDirective,
+    CommonModule,
+    HlmIconComponent,
+    IssueDescriptionComponent,
+    IssueCommentsComponent,
+    IssueAssigneesComponent,
+    HlmSpinnerComponent,
+    IssueTitleComponent,
+    IssueStatusComponent,
+    IssueReporterComponent,
+    IssuePriorityComponent,
+    IssueTypeComponent,
+  ],
+  providers: [
+    provideIcons({ lucideTrash, lucideMegaphone, lucideExpand, lucideTimer }),
+  ],
 })
-export class IssueDetailComponent{
-  @Input() issue: JIssue;
+export class IssueDetailComponent {
+  @Input() issue: IssueSchema;
   @Input() isShowFullScreenButton: boolean;
   @Input() isShowCloseButton: boolean;
   @Output() onClosed = new EventEmitter();
   @Output() onOpenIssue = new EventEmitter<string>();
   @Output() onDelete = new EventEmitter<DeleteIssueModel>();
 
-  constructor(public projectQuery: ProjectQuery, private _modalService: NzModalService) {}
+  constructor(
+    public _store: Store<RootState>,
+    private _hlmDialogService: HlmDialogService
+  ) {}
+
+  users = this._store.select(state => state.project.users);
 
   openDeleteIssueModal() {
-    this._modalService.create({
-      nzContent: IssueDeleteModalComponent,
-      nzClosable: false,
-      nzFooter: null,
-      nzStyle: {
-        top: '140px'
-      },
-      nzComponentParams: {
+    this._hlmDialogService.open(IssueDeleteModalComponent, {
+      context: {
         issueId: this.issue.id,
-        onDelete: this.onDelete
-      }
+        onDelete: this.onDelete,
+      },
     });
+    // this._modalService.create({
+    //   nzContent: IssueDeleteModalComponent,
+    //   nzClosable: false,
+    //   nzFooter: null,
+    //   nzStyle: {
+    //     top: '140px',
+    //   },
+    //   nzComponentParams: {
+    //     issueId: this.issue.id,
+    //     onDelete: this.onDelete,
+    //   },
+    // });
   }
 
   closeModal() {

@@ -1,45 +1,82 @@
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
+import {
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemDirective,
+  HlmMenuItemIconDirective,
+  HlmMenuItemSubIndicatorComponent,
+  HlmMenuLabelComponent,
+  HlmMenuSeparatorComponent,
+  HlmMenuShortcutComponent,
+  HlmSubMenuComponent,
+} from '@/shared/components/ui-menu-helm/src';
+import { lastIssuePosition } from '@/stores/project/project.selector';
+import { ProjectActions } from '@/stores/project/projects.actions';
+import { RootState } from '@/stores/root-store';
+import { IssueSchema, IssueStatus, IssueStatusDisplay } from '@/types';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IssueStatus, IssueStatusDisplay, JIssue } from '@trungk18/interface/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
+import { Store } from '@ngrx/store';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
+import { map } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'issue-status',
   templateUrl: './issue-status.component.html',
-  styleUrls: ['./issue-status.component.scss']
+  imports: [
+    HlmButtonDirective,
+    CommonModule,
+    BrnMenuTriggerDirective,
+    HlmMenuComponent,
+    HlmSubMenuComponent,
+    HlmMenuItemDirective,
+    HlmMenuItemSubIndicatorComponent,
+    HlmMenuLabelComponent,
+    HlmMenuShortcutComponent,
+    HlmMenuSeparatorComponent,
+    HlmMenuItemIconDirective,
+    HlmMenuGroupComponent,
+  ],
 })
 export class IssueStatusComponent implements OnInit {
-  @Input() issue: JIssue;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  @Input() issue: IssueSchema;
+
   IssueStatusDisplay = IssueStatusDisplay;
 
   variants = {
     [IssueStatus.BACKLOG]: 'btn-secondary',
     [IssueStatus.SELECTED]: 'btn-secondary',
     [IssueStatus.IN_PROGRESS]: 'btn-primary',
-    [IssueStatus.DONE]: 'btn-success'
+    [IssueStatus.DONE]: 'btn-success',
   };
 
   issueStatuses: IssueStatusValueTitle[];
 
-  constructor(private _projectService: ProjectService, private _projectQuery: ProjectQuery) {}
+  constructor(private _store: Store<RootState>) {}
 
   ngOnInit(): void {
     this.issueStatuses = [
       new IssueStatusValueTitle(IssueStatus.BACKLOG),
       new IssueStatusValueTitle(IssueStatus.SELECTED),
       new IssueStatusValueTitle(IssueStatus.IN_PROGRESS),
-      new IssueStatusValueTitle(IssueStatus.DONE)
+      new IssueStatusValueTitle(IssueStatus.DONE),
     ];
   }
 
   updateIssue(status: IssueStatus) {
-    const newPosition = this._projectQuery.lastIssuePosition(status);
-    this._projectService.updateIssue({
-      ...this.issue,
-      status,
-      listPosition: newPosition + 1
-    });
+    this._store
+      .select(lastIssuePosition(status))
+      .pipe(map(position => position + 1))
+      .subscribe(newPosition => {
+        this._store.dispatch(
+          ProjectActions.updateIssues({
+            ...this.issue,
+            status,
+            listPosition: newPosition,
+          })
+        );
+      });
   }
 
   isStatusSelected(status: IssueStatus) {

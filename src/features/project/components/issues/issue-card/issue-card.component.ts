@@ -9,6 +9,7 @@ import { IssueUtil } from '@/shared/utils/issue';
 import { issueById } from '@/stores/project/project.selector';
 import { RootState } from '@/stores/root-store';
 import { IssuePriorityIcon, IssueSchema, UserSchema } from '@/types';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
@@ -31,6 +32,7 @@ import { IssueModalComponent } from '../issue-modal/issue-modal.component';
     HlmTooltipComponent,
     HlmTooltipTriggerDirective,
     BrnTooltipContentDirective,
+    CommonModule,
   ],
 })
 @UntilDestroy()

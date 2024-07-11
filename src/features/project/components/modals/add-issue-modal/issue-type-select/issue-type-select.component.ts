@@ -5,14 +5,20 @@ import { IssueUtil } from '@/shared/utils/issue';
 import { IssueType, IssueTypeWithIcon } from '@/types';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 
 @Component({
   standalone: true,
   selector: 'issue-type-select',
   templateUrl: './issue-type-select.component.html',
-  imports: [BrnSelectImports, HlmSelectImports, SvgIconComponent, CommonModule],
+  imports: [
+    BrnSelectImports,
+    HlmSelectImports,
+    SvgIconComponent,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
 })
 export class IssueTypeSelectComponent {
   @Input() control!: FormControl;

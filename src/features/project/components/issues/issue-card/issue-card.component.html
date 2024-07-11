@@ -8,51 +8,40 @@
     </p>
     <div class="flex items-center justify-between">
       <div class="flex items-center ml-1">
-        <hlm-tooltip>
-          <div
-            tabindex="0"
+        <hlm-tooltip *ngFor="let user of assignees">
+          <base-avatar
             hlmTooltipTrigger
-            position="right"
-            (click)="item.handler()"
-            class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 select-none transition-colors duration-100 cursor-pointer hover:bg-blue-400">
-            <navbar-icon [type]="item.icon" class="text-xl text-white" />
-          </div>
-          <span *brnTooltipContent>{{ item.tooltip }}</span>
+            position="below"
+            [className]="'shadow -ml-1'"
+            [size]="24"
+            [avatarUrl]="user.avatarUrl"></base-avatar>
+          <span *brnTooltipContent>Assignee: {{ user.name }}</span>
         </hlm-tooltip>
-        <base-avatar
-          *ngFor="let user of assignees"
-          [className]="'shadow-outline-white -ml-1'"
-          [size]="24"
-          nz-tooltip
-          [nzTooltipMouseEnterDelay]="0.3"
-          nzTooltipTitle="Assignee: {{ user.name }}"
-          nzTooltipPlacement="bottom"
-          [avatarUrl]="user.avatarUrl">
-        </base-avatar>
         <span [class.ml-3]="assignees.length" class="uppercase">
           {{ issue.iss_type }}-{{ issue.id }}
         </span>
       </div>
       <div class="flex items-center">
-        <svg-icon
-          class="mr-1 text-textMedium"
-          [name]="issueTypeIcon"
-          nz-tooltip
-          [nzTooltipMouseEnterDelay]="0.3"
-          [nzTooltipTitle]="issue.type"
-          nzTooltipPlacement="bottom"
-          [size]="20">
-        </svg-icon>
+        <hlm-tooltip>
+          <svg-icon
+            hlmTooltipTrigger
+            position="below"
+            class="mr-1"
+            [name]="issueTypeIcon"
+            [size]="20">
+          </svg-icon>
+          <span *brnTooltipContent>{{ issue.iss_type }}</span>
+        </hlm-tooltip>
 
-        <svg-icon
-          [name]="priorityIcon.icon"
-          nz-tooltip
-          [nzTooltipMouseEnterDelay]="0.3"
-          [nzTooltipTitle]="priorityIcon.value"
-          nzTooltipPlacement="bottom"
-          [size]="20"
-          [style.color]="priorityIcon.color">
-        </svg-icon>
+        <hlm-tooltip>
+          <svg-icon
+            hlmTooltipTrigger
+            position="below"
+            [name]="priorityIcon.icon"
+            [size]="20"
+            [style.color]="priorityIcon.color"></svg-icon>
+          <span *brnTooltipContent>{{ priorityIcon.value }}</span>
+        </hlm-tooltip>
       </div>
     </div>
   </div>

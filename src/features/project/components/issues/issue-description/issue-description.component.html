@@ -1,37 +1,34 @@
 <ng-container *ngIf="isEditing; else readonlyModeTmpl">
-    <quill-editor class="content-editor"
-                  [modules]="editorOptions"
-                  [formControl]="descriptionControl"
-                  [placeholder]="''"
-                  (onEditorCreated)="editorCreated($event)">
-    </quill-editor>
+  <quill-editor
+    class="content-editor"
+    [modules]="editorOptions"
+    [formControl]="descriptionControl"
+    [placeholder]="''"
+    (onEditorCreated)="editorCreated($event)">
+  </quill-editor>
 
-    <div class="pt-3 flex
-      items-center">
-        <j-button [isWorking]="isWorking"
-                  [className]="'btn-primary'"
-                  class="mr-2"
-                  (click)="save()">
-            Save</j-button>
-        <j-button (click)="cancel()"
-                  [className]="'btn-empty'">
-            Cancel
-        </j-button>
-    </div>
+  <div class="pt-3 flex items-center">
+    <button hlmBtn class="mr-2" (click)="save()">Save</button>
+    <button hlmBtn variant="outline" (click)="cancel()">Cancel</button>
+  </div>
 </ng-container>
 
 <ng-template #readonlyModeTmpl>
-    <div class="ql-snow content-readonly"
-         *ngIf="!isEditing"
-         (click)="setEditMode(true)">
-        <div class="ql-editor"
-             [innerHTML]="issue.description || 'Click to add description'"></div>
-        <div class="icon-edit">
-            <i nz-icon
-               class="cursor-pointer"
-               title="Click to edit"
-               nzType="edit"
-               nzTheme="outline"></i>
-        </div>
+  <div
+    tabindex="0"
+    class="ql-snow relative min-h-[50px] cursor-pointer group/item hover:bg-secondary"
+    *ngIf="!isEditing"
+    (click)="setEditMode(true)">
+    <div
+      class="ql-editor"
+      [innerHTML]="issue.description || 'Click to add description'"></div>
+    <div
+      class="font-normal hidden absolute right-[3px] top-[3px] group-hover/item:block">
+      <hlm-icon
+        class="cursor-pointer"
+        title="Click to edit"
+        size="sm"
+        name="lucidePencil" />
     </div>
+  </div>
 </ng-template>

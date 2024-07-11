@@ -1,7 +1,7 @@
 import { IssuePriority, IssuePriorityIcon, IssueType } from '@/types';
 
 export class IssueUtil {
-  static getIssueTypeIcon(issueType: IssueType): string {
+  static getIssueTypeIcon(issueType: IssueType) {
     return issueType?.toLowerCase();
   }
 

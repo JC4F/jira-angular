@@ -1,30 +1,47 @@
-import { Component, Input, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AvatarComponent } from '@/shared/components/avatar/avatar.component';
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
+import { HlmInputDirective } from '@/shared/components/ui-input-helm/src';
+import { ProjectActions } from '@/stores/project/projects.actions';
+import { RootState } from '@/stores/root-store';
+import { CommentSchema, UserSchema } from '@/types';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { CommonModule } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { JComment } from '@trungk18/interface/comment';
-import { JUser } from '@trungk18/interface/user';
-import { AuthQuery } from '@trungk18/project/auth/auth.query';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
+import { Store } from '@ngrx/store';
 
 @Component({
+  standalone: true,
   selector: 'issue-comment',
   templateUrl: './issue-comment.component.html',
-  styleUrls: ['./issue-comment.component.scss']
+  imports: [
+    AvatarComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    HlmButtonDirective,
+    HlmInputDirective,
+    TextFieldModule,
+  ],
 })
 @UntilDestroy()
 export class IssueCommentComponent implements OnInit {
   @Input() issueId: string;
-  @Input() comment: JComment;
+  @Input() comment: CommentSchema;
   @Input() createMode: boolean;
   @ViewChild('commentBoxRef') commentBoxRef: ElementRef;
   commentControl: FormControl;
-  user: JUser;
+  user: UserSchema;
   isEditing: boolean;
 
-  constructor(
-    private _authQuery: AuthQuery,
-    private projectService: ProjectService
-  ) {}
+  constructor(private _store: Store<RootState>) {}
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -39,12 +56,24 @@ export class IssueCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentControl = new FormControl('');
-    this._authQuery.user$.pipe(untilDestroyed(this)).subscribe((user) => {
-      this.user = user;
-      if (this.createMode) {
-        this.comment = new JComment(this.issueId, this.user);
-      }
-    });
+    this._store
+      .select(state => state.user)
+      .pipe(untilDestroyed(this))
+      .subscribe(user => {
+        this.user = user;
+        if (this.createMode) {
+          const now = new Date();
+          this.comment = {
+            id: `${now.getTime()}`,
+            issueId: this.issueId,
+            user: this.user,
+            createdAt: now.toISOString(),
+            updatedAt: now.toISOString(),
+            userId: this.user.id,
+            body: '',
+          };
+        }
+      });
   }
 
   setCommentEdit(mode: boolean) {
@@ -53,13 +82,18 @@ export class IssueCommentComponent implements OnInit {
 
   addComment() {
     const now = new Date();
-    this.projectService.updateIssueComment(this.issueId, {
-      ...this.comment,
-      id: `${now.getTime()}`,
-      createdAt: now.toISOString(),
-      updatedAt: now.toISOString(),
-      body: this.commentControl.value
-    });
+    this._store.dispatch(
+      ProjectActions.updateIssueComment({
+        issueId: this.issueId,
+        comment: {
+          ...this.comment,
+          id: `${now.getTime()}`,
+          createdAt: now.toISOString(),
+          updatedAt: now.toISOString(),
+          body: this.commentControl.value,
+        },
+      })
+    );
     this.cancelAddComment();
   }
 

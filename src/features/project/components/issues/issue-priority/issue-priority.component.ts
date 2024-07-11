@@ -1,17 +1,48 @@
+import { ProjectConst } from '@/constants';
+import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
+import {
+  HlmMenuComponent,
+  HlmMenuGroupComponent,
+  HlmMenuItemDirective,
+  HlmMenuItemIconDirective,
+  HlmMenuItemSubIndicatorComponent,
+  HlmMenuLabelComponent,
+  HlmMenuSeparatorComponent,
+  HlmMenuShortcutComponent,
+  HlmSubMenuComponent,
+} from '@/shared/components/ui-menu-helm/src';
+import { IssueUtil } from '@/shared/utils/issue';
+import { ProjectActions } from '@/stores/project/projects.actions';
+import { RootState } from '@/stores/root-store';
+import { IssuePriority, IssuePriorityIcon, IssueSchema } from '@/types';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { JIssue, IssuePriority } from '@trungk18/interface/issue';
-import { IssuePriorityIcon } from '@trungk18/interface/issue-priority-icon';
-import { IssueUtil } from '@trungk18/project/utils/issue';
-import { ProjectService } from '@trungk18/project/state/project/project.service';
-import { ProjectConst } from '@trungk18/project/config/const';
+import { Store } from '@ngrx/store';
+import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
 
 @Component({
+  standalone: true,
   selector: 'issue-priority',
   templateUrl: './issue-priority.component.html',
-  styleUrls: ['./issue-priority.component.scss']
+  imports: [
+    HlmButtonDirective,
+    CommonModule,
+    SvgIconComponent,
+    BrnMenuTriggerDirective,
+    HlmMenuComponent,
+    HlmSubMenuComponent,
+    HlmMenuItemDirective,
+    HlmMenuItemSubIndicatorComponent,
+    HlmMenuLabelComponent,
+    HlmMenuShortcutComponent,
+    HlmMenuSeparatorComponent,
+    HlmMenuItemIconDirective,
+    HlmMenuGroupComponent,
+  ],
 })
 export class IssuePriorityComponent implements OnInit, OnChanges {
-  @Input() issue: JIssue;
+  @Input() issue: IssueSchema;
 
   selectedPriority: IssuePriority;
   get selectedPriorityIcon() {
@@ -20,7 +51,7 @@ export class IssuePriorityComponent implements OnInit, OnChanges {
 
   priorities: IssuePriorityIcon[];
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private _store: Store<RootState>) {}
 
   ngOnInit() {
     this.priorities = ProjectConst.PrioritiesWithIcon;
@@ -36,9 +67,11 @@ export class IssuePriorityComponent implements OnInit, OnChanges {
 
   updateIssue(priority: IssuePriority) {
     this.selectedPriority = priority;
-    this._projectService.updateIssue({
-      ...this.issue,
-      priority: this.selectedPriority
-    });
+    this._store.dispatch(
+      ProjectActions.updateIssues({
+        ...this.issue,
+        priority: this.selectedPriority,
+      })
+    );
   }
 }
