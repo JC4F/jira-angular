@@ -65,10 +65,10 @@ export const sheetVariants = cva(
       <ng-content />
     }
     <ng-content />
-    <button brnSheetClose hlm>
+    <!-- <button brnSheetClose hlm>
       <span class="sr-only">Close</span>
       <hlm-icon class="flex w-4 h-4" size="100%" name="lucideX" />
-    </button>
+    </button> -->
   `,
 })
 export class HlmSheetContentComponent implements OnInit {

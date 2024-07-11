@@ -26,9 +26,9 @@ export class AppComponent implements OnInit {
     this._store.dispatch(
       AuthActions.login({ email: 'test', password: 'pw_test' })
     );
-    this._store
-      .select(state => state.user.isLoading)
-      .subscribe(x => console.log('check x: >> ', x));
+    // this._store
+    //   .select(state => state.user.isLoading)
+    //   .subscribe(x => console.log('check x: >> ', x));
   }
 
   isLoading = this._store.select(state => state.user.isLoading);

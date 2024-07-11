@@ -13,6 +13,7 @@ import { hlmDialogOverlayClass } from './hlm-dialog-overlay.directive';
 export type HlmDialogOptions<DialogContext = any> = BrnDialogOptions & {
   contentClass?: string;
   context?: DialogContext;
+  withCloseButton?: boolean;
 };
 
 @Injectable({

@@ -1,9 +1,9 @@
 <aside>
   <div
-    class="h-screen w-[64px] pt-6 pb-5 flex flex-col bg-secondary flex-shrink-0 gap-2">
+    class="h-screen w-[64px] pt-6 pb-5 flex flex-col bg-secondary flex-shrink-0 gap-4 border-r">
     <div
       class="relative flex items-center justify-center"
-      title="Angular Jira Clone by jc4f">
+      title="Angular Jira Clone by JC4F">
       <jira-icon />
     </div>
 
@@ -14,10 +14,11 @@
         <button
           hlmBtn
           size="icon"
-          variant="default"
+          variant="ghost"
           hlmTooltipTrigger
           position="right"
-          (click)="item.handler()">
+          (click)="item.handler()"
+          class="hover:bg-[rgba(0,0,0,0.04)]">
           <navbar-icon [type]="item.icon" class="h-6" />
         </button>
         <span *brnTooltipContent>{{ item.tooltip }}</span>

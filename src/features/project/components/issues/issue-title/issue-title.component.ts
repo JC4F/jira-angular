@@ -2,7 +2,6 @@ import { HlmInputDirective } from '@/shared/components/ui-input-helm/src';
 import { ProjectActions } from '@/stores/project/projects.actions';
 import { RootState } from '@/stores/root-store';
 import { IssueSchema } from '@/types';
-import { TextFieldModule } from '@angular/cdk/text-field';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -11,7 +10,7 @@ import { Store } from '@ngrx/store';
   standalone: true,
   selector: 'issue-title',
   templateUrl: './issue-title.component.html',
-  imports: [ReactiveFormsModule, HlmInputDirective, TextFieldModule],
+  imports: [ReactiveFormsModule, HlmInputDirective],
 })
 export class IssueTitleComponent implements OnChanges {
   @Input() issue: IssueSchema;

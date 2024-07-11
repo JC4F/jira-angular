@@ -80,7 +80,9 @@ export class SearchDrawerComponent implements OnInit {
     this._hlmDialogService.open(IssueModalComponent, {
       context: {
         issue$: this._store.pipe(issueById(issue.id)),
+        withCloseButton: false,
       },
+      contentClass: 'w-[1000px] max-w-full md:w-[1000px]',
     });
     this.closeDrawer();
   }

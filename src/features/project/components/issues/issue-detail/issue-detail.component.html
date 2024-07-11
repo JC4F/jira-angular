@@ -2,37 +2,38 @@
   *ngIf="issue; else loaderTmpl"
   class="w-full h-full"
   [class.pl-4]="isShowCloseButton">
-  <div class="flex items-center pt-4 text-textDarkest">
+  <div class="flex items-center">
     <issue-type [issue]="issue"></issue-type>
     <div class="flex-auto"></div>
     <a
       target="_blank"
       href="https://github.com/trungk18/jira-clone-angular/issues/new">
-      <button hlmBtn variant="outline">
+      <button hlmBtn variant="ghost">
         <hlm-icon size="sm" name="lucideMegaphone" />Give Feedback
       </button>
     </a>
-    <button hlmBtn variant="outline" (click)="openDeleteIssueModal()">
+    <button hlmBtn variant="ghost" (click)="openDeleteIssueModal()">
       <hlm-icon size="sm" name="lucideTrash" />
     </button>
     <button
       hlmBtn
-      variant="outline"
+      variant="ghost"
       *ngIf="isShowCloseButton"
       (click)="openIssuePage()">
       <hlm-icon size="sm" name="lucideExpand" size="24" />
     </button>
     <button
       hlmBtn
-      variant="outline"
+      variant="ghost"
       *ngIf="isShowCloseButton"
       icon="times"
       (click)="closeModal()">
-      <hlm-icon size="sm" name="lucideTimer" size="24" />
+      <hlm-icon size="sm" name="lucideX" size="24" />
     </button>
   </div>
-  <div class="flex w-full flex-wrap pb-16">
-    <div class="sm:w-full md:w-7/12 lg:w-4/6 pr-10">
+  <div class="flex w-full flex-wrap pb-4 h-full">
+    <div
+      class="sm:w-full md:w-7/12 lg:w-4/6 pr-10 h-full overflow-y-auto max-h-[calc(100vh-90px)] md:max-h-[calc(90vh-90px)]">
       <issue-title [issue]="issue"></issue-title>
 
       <div class="pt-4 pb-2 text-15 font-medium">Description</div>
@@ -41,7 +42,7 @@
       <div class="pt-4 pb-2 text-15 font-medium">Comments</div>
       <issue-comments [issue]="issue"></issue-comments>
     </div>
-    <div class="sm:w-full md:w-5/12 lg:w-2/6 pt-1">
+    <div class="sm:w-full md:w-5/12 lg:w-2/6 pt-1 pl-2">
       <issue-status [issue]="issue"></issue-status>
       <issue-reporter [issue]="issue" [users]="(users | async) || []">
       </issue-reporter>

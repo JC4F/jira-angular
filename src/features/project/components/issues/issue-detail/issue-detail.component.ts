@@ -10,8 +10,8 @@ import { provideIcons } from '@ng-icons/core';
 import {
   lucideExpand,
   lucideMegaphone,
-  lucideTimer,
   lucideTrash,
+  lucideX,
 } from '@ng-icons/lucide';
 import { Store } from '@ngrx/store';
 import { IssueAssigneesComponent } from '../issue-assignees/issue-assignees.component';
@@ -43,7 +43,7 @@ import { IssueTypeComponent } from '../issue-type/issue-type.component';
     IssueTypeComponent,
   ],
   providers: [
-    provideIcons({ lucideTrash, lucideMegaphone, lucideExpand, lucideTimer }),
+    provideIcons({ lucideTrash, lucideMegaphone, lucideExpand, lucideX }),
   ],
 })
 export class IssueDetailComponent {

@@ -5,7 +5,7 @@ import { RootState } from '@/stores/root-store';
 import { ProjectSchema, SideBarLink } from '@/types';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 
@@ -13,7 +13,13 @@ import { Store } from '@ngrx/store';
   standalone: true,
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  imports: [AvatarComponent, CommonModule, RouterLink, SvgIconComponent],
+  imports: [
+    AvatarComponent,
+    CommonModule,
+    RouterLink,
+    SvgIconComponent,
+    RouterLinkActive,
+  ],
 })
 @UntilDestroy()
 export class SidebarComponent implements OnInit {

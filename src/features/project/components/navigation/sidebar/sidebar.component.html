@@ -10,37 +10,37 @@
         [rounded]="false"
         [size]="45"
         title="Angular Vietnam" />
-      <div class="pl-2">
-        <div class="font-medium">
+      <div class="pl-2 flex flex-col justify-center">
+        <h2 class="font-medium">
           {{ project.name }}
-        </div>
-        <div class="">{{ project.category }} Project</div>
+        </h2>
+        <p class="text-xs">{{ project.category }} Project</p>
       </div>
     </div>
 
-    <div *ngFor="let link of sideBarLinks; let idx = index">
+    <div *ngFor="let link of sideBarLinks; let idx = index" class="">
       <a
         *ngIf="link.url"
         [routerLink]="link.url"
-        routerLinkActive="active"
-        class="flex items-center relative py-2 px-3 rounded-sm">
+        routerLinkActive="bg-secondary"
+        class="flex items-center relative py-2 px-3 rounded-sm hover:bg-secondary">
         <svg-icon class="mr-4" [name]="link.icon" [size]="24" />
 
         <div class="">{{ link.name }}</div>
       </a>
       <div
         *ngIf="!link.url"
-        class="flex items-center relative py-2 px-3 rounded-sm">
+        class="flex items-center relative py-2 px-3 rounded-sm cursor-not-allowed group/item">
         <svg-icon class="mr-4" [name]="link.icon" [size]="24" />
 
-        <div class="5">{{ link.name }}</div>
+        <div class="">{{ link.name }}</div>
         <div
-          class="inline-block absolute rounded-sm uppercase opacity-0 text-xs font-bold top-[7px] left-10 w-[140px] py-1 pl-2">
+          class="inline-block absolute rounded-sm uppercase opacity-0 bg-accent text-xs font-bold top-[10px] left-10 w-[140px] py-1 pl-2 group-hover/item:opacity-100">
           Not implemented
         </div>
       </div>
 
-      <div *ngIf="idx === 1" class="mt-4 pt-4 border-t-2 border"></div>
+      <div *ngIf="idx === 1" class="mt-4 pt-4 border-t-2"></div>
     </div>
   </div>
 </div>

@@ -15,10 +15,10 @@ import {
   injectBrnDialogContext,
 } from '@spartan-ng/ui-dialog-brain';
 // import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import type { ClassValue } from 'clsx';
-import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 import { HlmIconComponent } from '@/shared/components/ui-icon-helm/src';
 import { provideIcons } from '@ng-icons/core';
+import type { ClassValue } from 'clsx';
+import { HlmDialogCloseDirective } from './hlm-dialog-close.directive';
 
 @Component({
   selector: 'hlm-dialog-content',
@@ -41,10 +41,12 @@ import { provideIcons } from '@ng-icons/core';
       <ng-content />
     }
 
-    <button brnDialogClose hlm>
-      <span class="sr-only">Close</span>
-      <hlm-icon class="flex w-4 h-4" size="none" name="lucideX" />
-    </button>
+    @if (withCloseButton) {
+      <button brnDialogClose hlm>
+        <span class="sr-only">Close</span>
+        <hlm-icon class="flex w-4 h-4" size="none" name="lucideX" />
+      </button>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -58,13 +60,19 @@ export class HlmDialogContentComponent {
   public readonly component = this._dialogContext?.$component;
   private readonly _dynamicComponentClass =
     this._dialogContext?.$dynamicComponentClass;
+  withCloseButton = this._dialogContext?.withCloseButton;
 
   public readonly userClass = input<ClassValue>('', { alias: 'class' });
   protected readonly _computedClass = computed(() =>
     hlm(
-      'border-border grid w-full max-w-lg relative gap-4 border bg-background p-6 shadow-lg [animation-duration:200] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%]  data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full',
+      'border-border grid w-full max-w-lg relative gap-4 border bg-background p-6 shadow-lg [animation-duration:200] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-top-[2%] data-[state=open]:slide-in-from-top-[2%] sm:rounded-lg md:w-full max-h-[100vh] md:max-h-[90vh]',
       this.userClass(),
       this._dynamicComponentClass
     )
   );
+
+  constructor() {
+    console.log(this._dialogContext);
+    if (this.withCloseButton === undefined) this.withCloseButton = true;
+  }
 }

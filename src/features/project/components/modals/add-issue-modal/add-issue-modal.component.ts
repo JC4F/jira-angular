@@ -3,6 +3,7 @@ import { NoWhitespaceValidator } from '@/core/validators/no-whitespace.validator
 import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
 import { HlmDialogHeaderComponent } from '@/shared/components/ui-dialog-helm/src';
 import { HlmInputDirective } from '@/shared/components/ui-input-helm/src';
+import { HlmLabelDirective } from '@/shared/components/ui-label-helm/src';
 import { AutofocusDirective } from '@/shared/directives/autofocus.directive';
 import { DateUtil } from '@/shared/utils/date';
 import { IssueUtil } from '@/shared/utils/issue';
@@ -45,6 +46,7 @@ import { IssueTypeSelectComponent } from './issue-type-select/issue-type-select.
     HlmButtonDirective,
     HlmDialogHeaderComponent,
     HlmInputDirective,
+    HlmLabelDirective,
   ],
 })
 @UntilDestroy()

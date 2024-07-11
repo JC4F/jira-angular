@@ -1,5 +1,5 @@
-<div class="flex items-center mt-6">
-  <form class="w-40 mr-4">
+<div class="flex items-center mt-6 gap-4">
+  <form class="">
     <base-input aria-label="search" icon="search" [control]="searchControl">
     </base-input>
   </form>
@@ -23,23 +23,24 @@
   </div>
   <button
     hlmBtn
-    class="ml-3"
-    [variant]="(onlyMyIssue | async) ? 'destructive' : 'outline'"
+    class="h-[34px]"
+    [variant]="(onlyMyIssue | async) ? 'secondary' : 'ghost'"
     (click)="onlyMyIssueChanged()">
     Only My Issues
   </button>
   <button
     hlmBtn
-    class="ml-3"
-    [variant]="(ignoreResolved | async) ? 'destructive' : 'outline'"
+    class="h-[34px]"
+    [variant]="(ignoreResolved | async) ? 'secondary' : 'ghost'"
     (click)="ignoreResolvedChanged()"
     [variant]="">
     Ignore Resolved
   </button>
-  <div class="ml-3 flex items-center" *ngIf="hasClearAll | async">
-    <div class="mr-3 w-px bg-backgroundMedium self-stretch"></div>
-    <button hlmBtn [className]="'btn-secondary'" (click)="resetAll()">
-      Clear all
-    </button>
-  </div>
+  <button
+    *ngIf="hasClearAll | async"
+    hlmBtn
+    class="h-[34px]"
+    (click)="resetAll()">
+    Clear all
+  </button>
 </div>

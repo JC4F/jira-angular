@@ -1,6 +1,8 @@
-<brn-select [formControl]="control">
-  class="inline-block w-full" placeholder="Select an option"
-  <hlm-select-trigger class="w-56">
+<brn-select
+  [formControl]="control"
+  class="inline-block w-full"
+  placeholder="Select an option">
+  <hlm-select-trigger class="w-[700px]">
     <hlm-select-value />
   </hlm-select-trigger>
   <hlm-select-content>
@@ -11,9 +13,7 @@
           [size]="20"
           [style.color]="priority.color">
         </svg-icon>
-        <span class="ml-3 font-semibold uppercase text-textMedium text-13">{{
-          priority.value
-        }}</span>
+        <span class="ml-3 font-semibold uppercase">{{ priority.value }}</span>
       </div></hlm-option
     >
   </hlm-select-content>
