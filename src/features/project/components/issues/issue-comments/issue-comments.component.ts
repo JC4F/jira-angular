@@ -1,4 +1,5 @@
 import { IssueSchema } from '@/types';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IssueCommentComponent } from '../issue-comment/issue-comment.component';
 
@@ -6,7 +7,7 @@ import { IssueCommentComponent } from '../issue-comment/issue-comment.component'
   standalone: true,
   selector: 'issue-comments',
   templateUrl: './issue-comments.component.html',
-  imports: [IssueCommentComponent],
+  imports: [IssueCommentComponent, CommonModule],
 })
 export class IssueCommentsComponent {
   @Input() issue: IssueSchema;

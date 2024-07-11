@@ -2,10 +2,13 @@ import { ProjectActions } from '@/stores/project/projects.actions';
 import { RootState } from '@/stores/root-store';
 import { DeleteIssueModel, IssueSchema } from '@/types';
 import { AsyncPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BrnDialogRef } from '@spartan-ng/ui-dialog-brain';
+import {
+  BrnDialogRef,
+  injectBrnDialogContext,
+} from '@spartan-ng/ui-dialog-brain';
 import { Observable } from 'rxjs';
 import { IssueDetailComponent } from '../issue-detail/issue-detail.component';
 
@@ -16,13 +19,21 @@ import { IssueDetailComponent } from '../issue-detail/issue-detail.component';
   imports: [IssueDetailComponent, AsyncPipe],
 })
 export class IssueModalComponent {
-  @Input() issue$: Observable<IssueSchema>;
+  private readonly _dialogContext = injectBrnDialogContext<{
+    issue$: Observable<IssueSchema>;
+  }>();
+
+  protected readonly issue$ = this._dialogContext.issue$;
 
   constructor(
     private _dialogRef: BrnDialogRef,
     private _router: Router,
     private _store: Store<RootState>
-  ) {}
+  ) {
+    // this.issue$.subscribe(issue => {
+    //   console.log('check issue: >> ', issue);
+    // });
+  }
 
   closeModal() {
     this._dialogRef.close();

@@ -102,7 +102,7 @@ export class HlmSheetContentComponent implements OnInit {
       const _sideProvider = injectExposedSideProvider({ host: true });
       this._sideSignal.set(_sideProvider.side());
     } catch (error) {
-      console.log('Catch err>>: ', error);
+      console.log('Catch side err>>: ', error);
     }
   }
 

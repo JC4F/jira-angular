@@ -2,6 +2,7 @@ import { InputComponent } from '@/shared/components/input/input.component';
 import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
 import { HlmDialogService } from '@/shared/components/ui-dialog-helm/src';
 import { IssueUtil } from '@/shared/utils/issue';
+import { issueById } from '@/stores/project/project.selector';
 import { RootState } from '@/stores/root-store';
 import { IssueSchema } from '@/types';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { BrnDialogRef } from '@spartan-ng/ui-dialog-brain';
 import { combineLatest, Observable, of } from 'rxjs';
 import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { IssueModalComponent } from '../../issues/issue-modal/issue-modal.component';
 import { IssueResultComponent } from '../issue-result/issue-result.component';
 
 @Component({
@@ -75,13 +77,11 @@ export class SearchDrawerComponent implements OnInit {
   }
 
   openIssueModal(issue: IssueSchema) {
-    console.log(issue);
-
-    // this._hlmDialogService.open(IssueModalComponent, {
-    //   context: {
-    //     issue$: this._store.pipe(issueById(issue.id)),
-    //   },
-    // });
+    this._hlmDialogService.open(IssueModalComponent, {
+      context: {
+        issue$: this._store.pipe(issueById(issue.id)),
+      },
+    });
     this.closeDrawer();
   }
 }

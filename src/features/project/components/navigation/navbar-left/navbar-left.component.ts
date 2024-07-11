@@ -1,4 +1,5 @@
 import { AvatarComponent } from '@/shared/components/avatar/avatar.component';
+import { JiraIconComponent } from '@/shared/components/icons';
 import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
 import { HlmDialogService } from '@/shared/components/ui-dialog-helm/src';
 import {
@@ -61,6 +62,7 @@ type Handler = () => void;
     BrnPopoverCloseDirective,
     HlmPopoverContentDirective,
     HlmPopoverCloseDirective,
+    JiraIconComponent,
   ],
   providers: [provideIcons({ lucideShieldQuestion })],
 })

@@ -4,7 +4,7 @@ import { issueById } from '@/stores/project/project.selector';
 import { ProjectActions } from '@/stores/project/projects.actions';
 import { RootState } from '@/stores/root-store';
 import { DeleteIssueModel, IssueSchema, ProjectSchema } from '@/types';
-import { AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -16,7 +16,7 @@ import { IssueDetailComponent } from '../../components/issues/issue-detail/issue
   standalone: true,
   selector: 'full-issue-detail',
   templateUrl: './full-issue-detail.component.html',
-  imports: [BreadcrumbsComponent, IssueDetailComponent, AsyncPipe],
+  imports: [BreadcrumbsComponent, IssueDetailComponent, CommonModule],
 })
 @UntilDestroy()
 export class FullIssueDetailComponent implements OnInit {

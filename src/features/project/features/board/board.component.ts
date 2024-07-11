@@ -1,4 +1,5 @@
 import { BreadcrumbsComponent } from '@/shared/components/breadcrumbs/breadcrumbs.component';
+import { XIconComponent } from '@/shared/components/icons';
 import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
 import { Component } from '@angular/core';
 import { BoardDndComponent } from '../../components/board/board-dnd/board-dnd.component';
@@ -13,6 +14,7 @@ import { BoardFilterComponent } from '../../components/board/board-filter/board-
     HlmButtonDirective,
     BoardFilterComponent,
     BoardDndComponent,
+    XIconComponent,
   ],
 })
 export class BoardComponent {
