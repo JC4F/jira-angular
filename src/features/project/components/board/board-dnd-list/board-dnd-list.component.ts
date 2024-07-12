@@ -50,6 +50,7 @@ export class BoardDndListComponent implements OnInit {
   drop(event: CdkDragDrop<IssueSchema[]>) {
     const newIssue: IssueSchema = { ...event.item.data };
     const newIssues = [...event.container.data];
+
     if (event.previousContainer === event.container) {
       moveItemInArray(newIssues, event.previousIndex, event.currentIndex);
       this.updateListPosition(newIssues);
