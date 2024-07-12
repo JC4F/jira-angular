@@ -83,7 +83,6 @@ export class NavbarLeftComponent implements OnInit {
   openCreateIssueModal() {
     this._hlmDialogService.open(AddIssueModalComponent, {
       contentClass: 'w-[750px] max-w-full md:w-[750px]',
-      withCloseButton: false,
     });
   }
 

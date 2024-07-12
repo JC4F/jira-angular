@@ -72,7 +72,6 @@ export class HlmDialogContentComponent {
   );
 
   constructor() {
-    console.log(this._dialogContext);
     if (this.withCloseButton === undefined) this.withCloseButton = true;
   }
 }

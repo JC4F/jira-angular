@@ -70,7 +70,9 @@ export class IssueCardComponent implements OnChanges, OnInit {
     this._hlmDialogService.open(IssueModalComponent, {
       context: {
         issue$: this._store.pipe(issueById(issueId)),
+        withCloseButton: false,
       },
+      contentClass: 'w-[1000px] max-w-full md:w-[1000px]',
     });
   }
 }
