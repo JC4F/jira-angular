@@ -1,4 +1,5 @@
 import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.component';
+import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
 import {
   HlmIconComponent,
   provideIcons,
@@ -50,6 +51,7 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/ui-menu-brain';
     HlmSubMenuComponent,
     BrnMenuTriggerDirective,
     HlmIconComponent,
+    HlmButtonDirective,
   ],
   providers: [provideIcons({ lucidePlus })],
 })

@@ -1,7 +1,11 @@
 <div class="mt-6 mb-1 uppercase text-textMedium text-13 font-bold">
   Reporter
 </div>
-<button hlmBtn variant="secondary" [brnMenuTriggerFor]="menu">
+<button
+  hlmBtn
+  variant="destructive"
+  [brnMenuTriggerFor]="menu"
+  class="h-[34px]">
   <base-user [user]="reporter"></base-user>
 </button>
 <ng-template #menu>

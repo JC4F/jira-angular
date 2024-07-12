@@ -3,6 +3,7 @@ import { NoWhitespaceValidator } from '@/core/validators/no-whitespace.validator
 import { BreadcrumbsComponent } from '@/shared/components/breadcrumbs/breadcrumbs.component';
 import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
 import { HlmInputDirective } from '@/shared/components/ui-input-helm/src';
+import { HlmSelectImports } from '@/shared/components/ui-select-helm/src';
 import { HlmToasterComponent } from '@/shared/components/ui-sonner-helm/src';
 import { AutofocusDirective } from '@/shared/directives/autofocus.directive';
 import { ProjectActions } from '@/stores/project/projects.actions';
@@ -14,6 +15,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
+import { BrnSelectImports } from '@spartan-ng/ui-select-brain';
 import { toast } from 'ngx-sonner';
 
 @Component({
@@ -27,6 +29,8 @@ import { toast } from 'ngx-sonner';
     BreadcrumbsComponent,
     HlmInputDirective,
     AutofocusDirective,
+    BrnSelectImports,
+    HlmSelectImports,
   ],
 })
 @UntilDestroy()

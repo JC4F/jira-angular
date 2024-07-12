@@ -23,6 +23,7 @@ export class FullIssueDetailComponent implements OnInit {
   project: ProjectSchema;
   issueById$: Observable<IssueSchema>;
   issueId: string;
+  isModal = false;
   get breadcrumbs(): string[] {
     return [ProjectConst.Projects, this.project?.name, 'Issues', this.issueId];
   }
@@ -54,12 +55,14 @@ export class FullIssueDetailComponent implements OnInit {
       ProjectConst.IssueId
     ) as string;
     if (!this.issueId) {
+      this.isModal = true;
       this.backHome();
       return;
     }
     this.issueById$ = this._store.pipe(
       issueById(this.issueId)
     ) as Observable<IssueSchema>;
+    this.isModal = false;
   }
 
   private backHome() {

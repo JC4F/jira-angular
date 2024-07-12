@@ -1,9 +1,9 @@
-<div class="mt-6 mb-1 uppercase font-bold">Status</div>
+<div class="mb-1 uppercase font-bold">Status</div>
 <button
   hlmBtn
-  variant="secondary"
+  variant="destructive"
   [brnMenuTriggerFor]="menu"
-  [className]="variants[issue.status] + ' uppercase'">
+  class="uppercase h-[34px]">
   {{ IssueStatusDisplay[issue.status] }}
 </button>
 

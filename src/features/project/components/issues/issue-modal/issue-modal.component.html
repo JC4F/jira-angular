@@ -1,5 +1,6 @@
 <issue-detail
   [issue]="(issue$ | async)!"
+  [isModal]="true"
   [isShowFullScreenButton]="true"
   [isShowCloseButton]="true"
   (onClosed)="closeModal()"

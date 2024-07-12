@@ -1,8 +1,10 @@
 <div class="mt-6 mb-1 uppercase font-bold">Assignees</div>
 
 <button
+  hlmBtn
+  variant="destructive"
   *ngFor="let assignee of assignees"
-  [className]="'btn-secondary mr-1-5 mb-2'">
+  class="mr-1 mb-2 h-[34px]">
   <div class="flex items-center">
     <base-user [user]="assignee"></base-user>
     <svg-icon

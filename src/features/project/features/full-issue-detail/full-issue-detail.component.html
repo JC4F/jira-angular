@@ -2,6 +2,7 @@
   <breadcrumbs [items]="breadcrumbs"></breadcrumbs>
   <issue-detail
     *ngIf="issueId"
+    [isModal]="isModal"
     [issue]="(issueById$ | async)!"
     [isShowCloseButton]="false"
     [isShowFullScreenButton]="false"

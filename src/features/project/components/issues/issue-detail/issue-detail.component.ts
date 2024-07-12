@@ -47,6 +47,7 @@ import { IssueTypeComponent } from '../issue-type/issue-type.component';
   ],
 })
 export class IssueDetailComponent {
+  @Input() isModal: boolean;
   @Input() issue: IssueSchema;
   @Input() isShowFullScreenButton: boolean;
   @Input() isShowCloseButton: boolean;
