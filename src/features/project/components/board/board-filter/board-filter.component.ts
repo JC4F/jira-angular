@@ -10,7 +10,7 @@ import { RootState } from '@/stores/root-store';
 import { UserSchema } from '@/types';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { BrnTooltipContentDirective } from '@spartan-ng/ui-tooltip-brain';
@@ -28,6 +28,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     HlmTooltipComponent,
     HlmTooltipTriggerDirective,
     BrnTooltipContentDirective,
+    ReactiveFormsModule,
   ],
 })
 @UntilDestroy()
@@ -51,7 +52,7 @@ export class BoardFilterComponent implements OnInit {
     this.searchControl.valueChanges
       .pipe(debounceTime(100), distinctUntilChanged(), untilDestroyed(this))
       .subscribe(term => {
-        this._store.dispatch(FilterActions.searchTerm(term));
+        this._store.dispatch(FilterActions.searchTerm({ searchTerm: term }));
       });
 
     this._store
