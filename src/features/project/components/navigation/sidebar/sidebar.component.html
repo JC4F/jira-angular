@@ -1,8 +1,15 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <div
   [style.width.px]="sidebarWidth"
-  class="will-change-[width] transition-[width] h-full relative">
+  [ngClass]="[
+    'will-change-[width] transition-[width] h-full relative z-[1] bg-card shadow',
+    isLargeDesktop ? '' : '!fixed',
+  ]">
   <div
-    class="absolute h-full left-0 min-w-[240px] overflow-x-hidden top-0 w-full px-4">
+    [ngClass]="[
+      'absolute h-full left-0 overflow-x-hidden top-0 will-change-[opacity] transition-opacity shadow',
+      expanded ? 'w-[240px] px-4 opacity-100' : 'w-0 opacity-0',
+    ]">
     <div class="flex px-1 py-6">
       <base-avatar
         avatarUrl="https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_256/v1593097745/angular-vietnam-transparent_iwfwxa.png"
@@ -43,4 +50,15 @@
       <div *ngIf="idx === 1" class="mt-4 pt-4 border-t-2"></div>
     </div>
   </div>
+
+  <app-resizer (click)="toggle()" [expanded]="expanded"></app-resizer>
+  <div
+    *ngIf="!isLargeDesktop"
+    [ngClass]="[
+      'bg-background/80 backdrop-blur-sm fixed inset-0 left-[304px] z-[-1]',
+      expanded
+        ? 'animate-in fade-in-0 opacity-100'
+        : 'animate-out fade-out-0 opacity-0 hidden',
+    ]"
+    (click)="toggle()"></div>
 </div>

@@ -4,10 +4,11 @@ import { SvgIconComponent } from '@/shared/components/svg-icon/svg-icon.componen
 import { RootState } from '@/stores/root-store';
 import { ProjectSchema, SideBarLink } from '@/types';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
+import { ResizerComponent } from '../resizer/resizer.component';
 
 @Component({
   standalone: true,
@@ -19,11 +20,18 @@ import { Store } from '@ngrx/store';
     RouterLink,
     SvgIconComponent,
     RouterLinkActive,
+    ResizerComponent,
   ],
 })
 @UntilDestroy()
 export class SidebarComponent implements OnInit {
   @Input() expanded: boolean;
+  @Input() isLargeDesktop: boolean;
+  @Output() manualToggle = new EventEmitter();
+
+  toggle() {
+    this.manualToggle.emit();
+  }
 
   get sidebarWidth(): number {
     return this.expanded ? 240 : 15;

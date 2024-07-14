@@ -1,7 +1,10 @@
 <div class="flex">
-  <div class="flex flex-row overflow-hidden h-full">
+  <div class="flex flex-row h-full">
     <app-navbar-left></app-navbar-left>
-    <app-sidebar [expanded]="expanded"></app-sidebar>
+    <app-sidebar
+      [expanded]="expanded"
+      [isLargeDesktop]="isLargeDesktop"
+      (manualToggle)="manualToggle()"></app-sidebar>
   </div>
-  <app-resizer (click)="toggle()" [expanded]="expanded"></app-resizer>
+  <!-- <app-resizer (click)="toggle()" [expanded]="expanded"></app-resizer> -->
 </div>
