@@ -3,35 +3,19 @@
     <base-input aria-label="search" icon="search" [control]="searchControl">
     </base-input>
   </form>
-  <div class="flex flex-row mr-3">
-    <hlm-tooltip *ngFor="let user of projectUsers | async">
-      <div
-        tabindex="0"
-        hlmTooltipTrigger
-        position="below"
-        class="cursor-pointer -ml-1 flex rounded-full transition-transform duration-100">
-        <base-avatar
-          class="flex"
-          className="select-none shadow hover:translate-y-[-5px]"
-          [avatarUrl]="user.avatarUrl"
-          [size]="36"
-          (click)="userChanged(user)">
-        </base-avatar>
-      </div>
-      <span *brnTooltipContent>{{ user.name }}</span>
-    </hlm-tooltip>
-  </div>
+
+  <board-filter-user />
   <button
     hlmBtn
-    class="h-[34px]"
-    [variant]="(onlyMyIssue | async) ? 'secondary' : 'ghost'"
+    class="h-[34px] hidden xl:inline-block leading-4"
+    [variant]="(onlyMyIssue | async) ? 'secondary' : 'outline'"
     (click)="onlyMyIssueChanged()">
     Only My Issues
   </button>
   <button
     hlmBtn
-    class="h-[34px]"
-    [variant]="(ignoreResolved | async) ? 'secondary' : 'ghost'"
+    class="h-[34px] hidden xl:inline-block leading-4"
+    [variant]="(ignoreResolved | async) ? 'secondary' : 'outline'"
     (click)="ignoreResolvedChanged()"
     [variant]="">
     Ignore Resolved
@@ -39,8 +23,44 @@
   <button
     *ngIf="hasClearAll | async"
     hlmBtn
-    class="h-[34px]"
+    class="h-[34px] hidden xl:inline-block leading-4"
     (click)="resetAll()">
-    Clear all
+    <span class="hidden xl:inline">Clear all</span>
+  </button>
+  <button
+    hlmBtn
+    variant="outline"
+    [brnMenuTriggerFor]="menu"
+    class="h-[34px] p-2 inline-block ml-auto xl:hidden">
+    <hlm-icon size="sm" name="lucideMoreHorizontal" />
   </button>
 </div>
+
+<ng-template #menu>
+  <hlm-menu class="w-56">
+    <hlm-menu-group>
+      <button
+        hlmMenuItemCheckbox
+        [checked]="onlyMyIssue | async"
+        (triggered)="onlyMyIssueChanged()">
+        <hlm-menu-item-check />
+        <span>Only My Issues</span>
+      </button>
+
+      <button
+        hlmMenuItemCheckbox
+        [checked]="ignoreResolved | async"
+        (triggered)="ignoreResolvedChanged()">
+        <hlm-menu-item-check />
+        <span>Ignore Resolved</span>
+      </button>
+    </hlm-menu-group>
+
+    <hlm-menu-separator />
+
+    <button hlmMenuItem (triggered)="resetAll()">
+      <hlm-icon size="sm" name="lucideTrash" hlmMenuIcon />
+      Reset
+    </button>
+  </hlm-menu>
+</ng-template>

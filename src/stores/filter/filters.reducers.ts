@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { FilterActions } from './filters.actions';
 import { immerOn } from 'ngrx-immer/store';
+import { FilterActions } from './filters.actions';
 
 export type FilterState = {
   searchTerm: string;
@@ -25,7 +25,7 @@ export const filterReducer = createFeature({
     }),
     immerOn(FilterActions.toggleUserId, (state, { userId }) => {
       const hasUser = state.userIds.includes(userId);
-      if (hasUser) state.userIds.filter(x => x !== userId);
+      if (hasUser) state.userIds = state.userIds.filter(x => x !== userId);
       else state.userIds.push(userId);
     }),
     immerOn(FilterActions.toggleOnlyMyIssue, state => {

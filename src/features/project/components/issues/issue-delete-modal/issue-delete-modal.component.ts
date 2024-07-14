@@ -1,7 +1,10 @@
 import { HlmButtonDirective } from '@/shared/components/ui-button-helm/src';
-import { DeleteIssueModel } from '@/types';
-import { Component, EventEmitter } from '@angular/core';
-import { BrnDialogRef } from '@spartan-ng/ui-dialog-brain';
+import { DeleteIssueContext } from '@/types';
+import { Component } from '@angular/core';
+import {
+  BrnDialogRef,
+  injectBrnDialogContext,
+} from '@spartan-ng/ui-dialog-brain';
 
 @Component({
   standalone: true,
@@ -10,9 +13,10 @@ import { BrnDialogRef } from '@spartan-ng/ui-dialog-brain';
   imports: [HlmButtonDirective],
 })
 export class IssueDeleteModalComponent {
-  issueId: string;
-
-  onDelete = new EventEmitter<DeleteIssueModel>();
+  private readonly _dialogContext =
+    injectBrnDialogContext<DeleteIssueContext>();
+  issueId = this._dialogContext.issueId;
+  onDelete = this._dialogContext.onDelete;
 
   constructor(private _dialogRef: BrnDialogRef) {}
 

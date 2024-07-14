@@ -69,18 +69,6 @@ export class IssueDetailComponent {
         onDelete: this.onDelete,
       },
     });
-    // this._modalService.create({
-    //   nzContent: IssueDeleteModalComponent,
-    //   nzClosable: false,
-    //   nzFooter: null,
-    //   nzStyle: {
-    //     top: '140px',
-    //   },
-    //   nzComponentParams: {
-    //     issueId: this.issue.id,
-    //     onDelete: this.onDelete,
-    //   },
-    // });
   }
 
   closeModal() {

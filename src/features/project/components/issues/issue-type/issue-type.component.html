@@ -5,7 +5,7 @@
     [brnMenuTriggerFor]="menu"
     [className]="'font-semibold uppercase'">
     <svg-icon [name]="selectedIssueTypeIcon" [size]="20" />
-    {{ issue.iss_type }}-{{ issue.id }}
+    <span class="ml-1">{{ issue.iss_type }}-{{ issue.id }}</span>
   </button>
 </div>
 

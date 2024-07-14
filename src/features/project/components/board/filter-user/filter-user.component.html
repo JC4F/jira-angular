@@ -1,0 +1,58 @@
+<div class="flex flex-row">
+  <hlm-tooltip *ngFor="let user of projectUsers | async; index as i">
+    <div
+      *ngIf="i < maxUserShow"
+      tabindex="0"
+      hlmTooltipTrigger
+      position="below"
+      class="cursor-pointer -ml-1 flex rounded-full transition-transform duration-100">
+      <base-avatar
+        class="flex"
+        [className]="
+          'select-none hover:translate-y-[-5px]' +
+          (isUserSelected(user)
+            ? ' shadow-[0_0_0_4px_rgba(0,0,0,0.3)] shadow-red-300'
+            : '')
+        "
+        [avatarUrl]="user.avatarUrl"
+        [size]="36"
+        (click)="userChanged(user)">
+      </base-avatar>
+    </div>
+    <span *brnTooltipContent>{{ user.name }}</span>
+  </hlm-tooltip>
+
+  <ng-container *ngIf="remainUsers > 0">
+    <brn-popover sideOffset="5" closeDelay="100">
+      <hlm-tooltip>
+        <button
+          brnPopoverTrigger
+          hlmTooltipTrigger
+          position="below"
+          class="w-9 h-9 bg-card cursor-pointer -ml-1 flex rounded-full transition-transform duration-100 border items-center justify-center">
+          <p class="leading-4 font-medium">{{ remainUsers }}+</p>
+        </button>
+        <span *brnTooltipContent>More People</span>
+      </hlm-tooltip>
+
+      <div
+        hlmPopoverContent
+        class="w-[180px] max-h-[300px] py-3 overflow-y-auto"
+        *brnPopoverContent="let ctx">
+        <div class="flex flex-col gap-2">
+          <ng-container *ngFor="let user of projectUsers | async; index as i">
+            <div *ngIf="i >= maxUserShow">
+              <label class="flex items-center" hlmLabel>
+                <hlm-checkbox
+                  class="mr-2"
+                  [checked]="isUserSelected(user)"
+                  (checkedChange)="handleCheckChanged($event, user)" />
+                <base-user [user]="user" />
+              </label>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </brn-popover>
+  </ng-container>
+</div>

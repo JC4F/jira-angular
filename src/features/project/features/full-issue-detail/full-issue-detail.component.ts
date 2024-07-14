@@ -47,7 +47,7 @@ export class FullIssueDetailComponent implements OnInit {
   deleteIssue({ issueId, _dialogRef }: DeleteIssueModel) {
     this._store.dispatch(ProjectActions.deleteIssues({ issueId }));
     _dialogRef.close();
-    this.backHome();
+    this.backProjectBoard();
   }
 
   private getIssue() {
@@ -56,7 +56,7 @@ export class FullIssueDetailComponent implements OnInit {
     ) as string;
     if (!this.issueId) {
       this.isModal = true;
-      this.backHome();
+      this.backProjectBoard();
       return;
     }
     this.issueById$ = this._store.pipe(
@@ -65,7 +65,7 @@ export class FullIssueDetailComponent implements OnInit {
     this.isModal = false;
   }
 
-  private backHome() {
-    this._router.navigate(['/']);
+  private backProjectBoard() {
+    this._router.navigate(['/project/board']);
   }
 }

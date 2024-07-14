@@ -4,32 +4,34 @@
   [class.pl-4]="isShowCloseButton">
   <div class="flex items-center">
     <issue-type [issue]="issue"></issue-type>
-    <div class="flex-auto"></div>
-    <a
-      target="_blank"
-      href="https://github.com/trungk18/jira-clone-angular/issues/new">
-      <button hlmBtn variant="ghost">
-        <hlm-icon size="sm" name="lucideMegaphone" />Give Feedback
+    <div class="ml-auto">
+      <a
+        target="_blank"
+        href="https://github.com/trungk18/jira-clone-angular/issues/new">
+        <button hlmBtn variant="ghost">
+          <hlm-icon size="20" name="lucideMegaphone" />
+          <span class="ml-1 hidden sm:inline">Give Feedback</span>
+        </button>
+      </a>
+      <button hlmBtn variant="ghost" (click)="openDeleteIssueModal()">
+        <hlm-icon size="20" name="lucideTrash" />
       </button>
-    </a>
-    <button hlmBtn variant="ghost" (click)="openDeleteIssueModal()">
-      <hlm-icon size="sm" name="lucideTrash" />
-    </button>
-    <button
-      hlmBtn
-      variant="ghost"
-      *ngIf="isShowCloseButton"
-      (click)="openIssuePage()">
-      <hlm-icon size="sm" name="lucideExpand" size="24" />
-    </button>
-    <button
-      hlmBtn
-      variant="ghost"
-      *ngIf="isShowCloseButton"
-      icon="times"
-      (click)="closeModal()">
-      <hlm-icon size="sm" name="lucideX" size="24" />
-    </button>
+      <button
+        hlmBtn
+        variant="ghost"
+        *ngIf="isShowCloseButton"
+        (click)="openIssuePage()">
+        <hlm-icon size="20" name="lucideExpand" />
+      </button>
+      <button
+        hlmBtn
+        variant="ghost"
+        *ngIf="isShowCloseButton"
+        icon="times"
+        (click)="closeModal()">
+        <hlm-icon size="20" name="lucideX" />
+      </button>
+    </div>
   </div>
   <div class="flex w-full flex-wrap pb-4 h-full">
     <div
