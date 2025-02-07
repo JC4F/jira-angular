@@ -12,10 +12,6 @@ Tech:
 yarn
 ```
 
-### Setup .env file
-
-Change .env.example => .env
-
 ### Start the app
 
 ```shell
